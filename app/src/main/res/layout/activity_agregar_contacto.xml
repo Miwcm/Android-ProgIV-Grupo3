@@ -56,6 +56,44 @@
             android:textSize="14sp" />
     </TableRow>
 
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TELÉFONO"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow>
+        <EditText
+            android:id="@+id/editTextTelefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Teléfono"
+            android:inputType="phone" />
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EMAIL"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow>
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+    </TableRow>
+
 </TableLayout>
 
 
