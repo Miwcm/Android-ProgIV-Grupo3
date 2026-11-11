@@ -94,6 +94,42 @@
 
     </TableRow>
 
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DIRECCIÓN"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow>
+        <EditText
+            android:id="@+id/editTextDireccion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Dirección"
+            android:inputType="textPostalAddress" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FECHA DE NACIMIENTO"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow>
+        <EditText
+            android:id="@+id/editTextFechaNacimiento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="dd/MM/aaaa"
+            android:inputType="date" />
+    </TableRow>
+
 </TableLayout>
 
 
