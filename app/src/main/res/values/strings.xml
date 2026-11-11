@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TP6_GRUPO_3</string>
+
+    <string name="campo_nombre">El nombre</string>
+    <string name="campo_apellido">El apellido</string>
+    <string name="error_solo_letras">Solo se permiten letras (sin números ni símbolos)</string>
+    <string name="error_campo_vacio">No puede estar vacío</string>
 </resources>

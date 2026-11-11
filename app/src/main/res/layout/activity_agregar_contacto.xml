@@ -25,10 +25,11 @@
 
         <EditText
             android:id="@+id/editTextNombre"
+            android:maxLength="40"
             android:layout_width="361dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="textPersonName|textCapWords"
             android:textSize="14sp" />
     </TableRow>
 
@@ -49,10 +50,11 @@
 
         <EditText
             android:id="@+id/editTextApellido"
+            android:maxLength="40"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="textPersonName|textCapWords"
             android:textSize="14sp" />
     </TableRow>
 
