@@ -100,21 +100,18 @@ public class AgregarContacto extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //Handle item selection
-        int id =item.getItemId();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
 
-        if (id== R.id.AgregarContacto){
-            Intent intent = new Intent(this, AgregarContacto.class);
-            startActivity(intent);
+        if (id == R.id.AgregarContacto) {
+            // Ya estamos en esta pantalla, no hacemos nada
             return true;
-        }
-        else if (id == R.id.ListarContacto){
+        } else if (id == R.id.ListarContacto) {
             Intent intent = new Intent(this, ListarContacto.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
