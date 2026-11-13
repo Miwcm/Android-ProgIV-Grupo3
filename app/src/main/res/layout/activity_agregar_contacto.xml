@@ -14,6 +14,7 @@
         android:layout_margin="20dp"
         android:stretchColumns="0">
 
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -22,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NOMBRE" />
-
         </TableRow>
 
         <TableRow
@@ -75,17 +75,21 @@
         </TableRow>
 
         <TableRow>
-
-            <EditText
-                android:id="@+id/editTextTelefono"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Teléfono"
-                android:inputType="phone" />
+        <EditText
+            android:id="@+id/editTextTelefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Teléfono"
+            android:inputType="phone" />
+        <Spinner
+            android:id="@+id/spinnerTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:contentDescription="@string/desc_tipo_telefono" />
 
         </TableRow>
-
         <TableRow>
 
             <TextView
@@ -95,17 +99,23 @@
                 android:textStyle="bold" />
         </TableRow>
 
-        <TableRow>
 
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
+    <TableRow>
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+        <Spinner
+            android:id="@+id/spinnerEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:contentDescription="@string/desc_tipo_email" />
 
-        </TableRow>
+    </TableRow>
 
         <TableRow>
 
@@ -148,5 +158,6 @@
         </TableRow>
 
     </TableLayout>
-</ScrollView>
+    </ScrollView>
+
 

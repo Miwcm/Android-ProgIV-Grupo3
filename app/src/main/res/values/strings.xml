@@ -5,4 +5,12 @@
     <string name="campo_apellido">El apellido</string>
     <string name="error_solo_letras">Solo se permiten letras (sin números ni símbolos)</string>
     <string name="error_campo_vacio">No puede estar vacío</string>
+
+    <string-array name="tipos_contacto">
+        <item>Casa</item>
+        <item>Trabajo</item>
+        <item>Móvil</item>
+    </string-array>
+    <string name="desc_tipo_telefono">Tipo de teléfono</string>
+    <string name="desc_tipo_email">Tipo de email</string>
 </resources>

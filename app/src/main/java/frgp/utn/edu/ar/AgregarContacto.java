@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,9 @@ public class AgregarContacto extends AppCompatActivity {
 
     private EditText editTextNombre;
     private EditText editTextApellido;
+    private Spinner spinnerTelefono;
+    private Spinner spinnerEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,9 @@ public class AgregarContacto extends AppCompatActivity {
         editTextNombre = findViewById(R.id.editTextNombre);
         editTextApellido = findViewById(R.id.editTextApellido);
         configurarValidacionNombreApellido();
+        spinnerTelefono = findViewById(R.id.spinnerTelefono);
+        spinnerEmail = findViewById(R.id.spinnerEmail);
+        configurarSpinners();
     }
 
     private void configurarValidacionNombreApellido() {
@@ -92,6 +100,17 @@ public class AgregarContacto extends AppCompatActivity {
         boolean apellidoOk = validarCampoNombre(editTextApellido, getString(R.string.campo_apellido));
         return nombreOk && apellidoOk;
     }
+    private void configurarSpinners() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.tipos_contacto, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerTelefono.setAdapter(adapter);
+        spinnerEmail.setAdapter(adapter);
+    }
+
+    public String getTipoTelefono() { return spinnerTelefono.getSelectedItem().toString(); }
+    public String getTipoEmail()    { return spinnerEmail.getSelectedItem().toString(); }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
