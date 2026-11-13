@@ -1,137 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:fillViewport="true"
     tools:context=".AgregarContacto">
 
-    <TableRow
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NOMBRE" />
+        android:layout_margin="20dp"
+        android:stretchColumns="0">
 
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <EditText
-            android:id="@+id/editTextNombre"
-            android:maxLength="40"
-            android:layout_width="361dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName|textCapWords"
-            android:textSize="14sp" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="APELLIDO" />
-
-    </TableRow>
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <EditText
-            android:id="@+id/editTextApellido"
-            android:maxLength="40"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName|textCapWords"
-            android:textSize="14sp" />
-    </TableRow>
+            android:layout_height="match_parent">
 
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TELÉFONO"
-            android:textStyle="bold" />
-    </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOMBRE" />
 
-    <TableRow>
-        <EditText
-            android:id="@+id/editTextTelefono"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Teléfono"
-            android:inputType="phone" />
+        </TableRow>
 
-    </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EMAIL"
-            android:textStyle="bold" />
-    </TableRow>
+            <EditText
+                android:id="@+id/editTextNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName|textCapWords"
+                android:maxLength="40"
+                android:textSize="14sp" />
+        </TableRow>
 
-    <TableRow>
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
 
-    </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="APELLIDO" />
 
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DIRECCIÓN"
-            android:textStyle="bold" />
-    </TableRow>
+        </TableRow>
 
-    <TableRow>
-        <EditText
-            android:id="@+id/editTextDireccion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Dirección"
-            android:inputType="textPostalAddress" />
-    </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FECHA DE NACIMIENTO"
-            android:textStyle="bold" />
-    </TableRow>
+            <EditText
+                android:id="@+id/editTextApellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName|textCapWords"
+                android:maxLength="40"
+                android:textSize="14sp" />
+        </TableRow>
 
-    <TableRow>
-        <EditText
-            android:id="@+id/editTextFechaNacimiento"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="dd/MM/aaaa"
-            android:inputType="date" />
-    </TableRow>
+        <TableRow>
 
-</TableLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TELÉFONO"
+                android:textStyle="bold" />
+        </TableRow>
 
+        <TableRow>
+
+            <EditText
+                android:id="@+id/editTextTelefono"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Teléfono"
+                android:inputType="phone" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMAIL"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DIRECCIÓN"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/editTextDireccion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Dirección"
+                android:inputType="textPostalAddress" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FECHA DE NACIMIENTO"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/editTextFechaNacimiento"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="dd/MM/aaaa"
+                android:inputType="date" />
+        </TableRow>
+
+    </TableLayout>
+</ScrollView>
 
