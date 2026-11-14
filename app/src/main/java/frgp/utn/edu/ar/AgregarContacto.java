@@ -25,16 +25,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.util.Patterns;
 
 public class AgregarContacto extends AppCompatActivity {
     //Solo letras (con tildes y ñ). Permite nombres compuestos
     private static final String REGEX_NOMBRE = "^\\p{L}+([ '\\-]\\p{L}+)*$";
+
+    // Solo dígitos, con guiones únicamente entre grupos de dígitos (ej: xx-xxxx-xxxx)
+    private static final String REGEX_TELEFONO = "^\\d+(-\\d+)*$";
+    private static final int MIN_DIGITOS_TELEFONO = 6;
+    private static final int MAX_DIGITOS_TELEFONO = 15;
+    private static final int MAX_LARGO_TELEFONO = 20; // incluye guiones
 
     private EditText editTextNombre;
     private EditText editTextApellido;
     private Spinner spinnerTelefono;
     private Spinner spinnerEmail;
     private EditText editTextFechaNacimiento;
+    private EditText editTextTelefono;
+    private EditText editTextEmail;
+    private EditText editTextDireccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +63,17 @@ public class AgregarContacto extends AppCompatActivity {
         spinnerEmail = findViewById(R.id.spinnerEmail);
         configurarSpinners();
 
-        //PRUEBA VALIDAR FECHA
-        //editTextFechaNacimiento = findViewById(R.id.editTextFechaNacimiento);
+        editTextTelefono = findViewById(R.id.editTextTelefono);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextDireccion = findViewById(R.id.editTextDireccion);
+        configurarValidacionTelefonoEmail();
 
-        //editTextFechaNacimiento.setOnFocusChangeListener((v, hasFocus) -> {
-        //    if (!hasFocus) {
-        //        validacionFechaNac();
-        //    }
-        //});
+        editTextFechaNacimiento = findViewById(R.id.editTextFechaNacimiento);
+        editTextFechaNacimiento.setOnFocusChangeListener((v, tieneFoco) -> {
+            if (!tieneFoco && !editTextFechaNacimiento.getText().toString().trim().isEmpty()) {
+                validacionFechaNac();
+            }
+        });
     }
 
     private void configurarValidacionNombreApellido() {
@@ -154,72 +167,142 @@ public class AgregarContacto extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void validacionFechaNac(){
+    public boolean validacionFechaNac() {
 
-        boolean estado = true;
-
-        editTextFechaNacimiento.setError(null); //mostrar error en el campo
+        editTextFechaNacimiento.setError(null);
 
         String fecha = editTextFechaNacimiento.getText().toString().trim();
-
         String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
 
-        if(editTextFechaNacimiento.getText().toString().isEmpty()){
+        if (fecha.isEmpty()) {
             editTextFechaNacimiento.setError("Campo requerido");
-            estado = false;
+            return false;
         }
-        else if (!Pattern.matches(regex, fecha)) {
-                editTextFechaNacimiento.setError("Formato inválido. Use dd/MM/yyyy");
-                estado = false;
+
+        if (!Pattern.matches(regex, fecha)) {
+            editTextFechaNacimiento.setError("Formato inválido. Use dd/MM/yyyy");
+            return false;
         }
-        else{
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            formato.setLenient(false); // rechazo fechas incorrectas
 
-            try {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        formato.setLenient(false); // rechaza fechas inexistentes como 31/02
 
-                Date fechaNacimiento = formato.parse(fecha);
+        try {
+            Date fechaNacimiento = formato.parse(fecha);
 
-                Calendar hoy = Calendar.getInstance();
+            Calendar fechaMinima = Calendar.getInstance();
+            fechaMinima.add(Calendar.YEAR, -120);
 
-                Calendar fechaMinima = Calendar.getInstance();
-                fechaMinima.add(Calendar.YEAR, -120);
-
-                if (fechaNacimiento.after(hoy.getTime())) {
-                    editTextFechaNacimiento.setError("La fecha no puede ser futura");
-                }
-                else if (fechaNacimiento.before(fechaMinima.getTime())) {
-                    editTextFechaNacimiento.setError("La edad no puede superar los 120 años");
-                }
-
-            } catch (ParseException e) {
-                editTextFechaNacimiento.setError("La fecha ingresada no existe");
-                estado = false;
+            if (fechaNacimiento.after(new Date())) {
+                editTextFechaNacimiento.setError("La fecha no puede ser futura");
+                return false;
             }
+            if (fechaNacimiento.before(fechaMinima.getTime())) {
+                editTextFechaNacimiento.setError("La edad no puede superar los 120 años");
+                return false;
+            }
+        } catch (ParseException e) {
+            editTextFechaNacimiento.setError("La fecha ingresada no existe");
+            return false;
         }
+
+        return true;
     }
 
-    //public void probarFecha() {
+    // ===== Aporte 9: validaciones de Teléfono, Email y campos obligatorios =====
 
-    //     String fecha = "31/02/2024";
+    private void configurarValidacionTelefonoEmail() {
+        // Bloquea todo lo que no sea número o guion (también al pegar) y limita el largo
+        editTextTelefono.setFilters(new InputFilter[]{
+                crearFiltroTelefono(editTextTelefono),
+                new InputFilter.LengthFilter(MAX_LARGO_TELEFONO)
+        });
 
-    //     SimpleDateFormat formato =
-    //            new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        // Al salir del campo, valida el contenido completo
+        editTextTelefono.setOnFocusChangeListener((v, tieneFoco) -> {
+            if (!tieneFoco && !editTextTelefono.getText().toString().trim().isEmpty()) {
+                validarTelefono();
+            }
+        });
+        editTextEmail.setOnFocusChangeListener((v, tieneFoco) -> {
+            if (!tieneFoco && !editTextEmail.getText().toString().trim().isEmpty()) {
+                validarEmail();
+            }
+        });
+    }
 
-    //    formato.setLenient(false);
+    private InputFilter crearFiltroTelefono(EditText campo) {
+        return (source, start, end, dest, dstart, dend) -> {
+            StringBuilder permitido = new StringBuilder();
+            boolean huboRechazo = false;
+            for (int i = start; i < end; i++) {
+                char c = source.charAt(i);
+                if ((c >= '0' && c <= '9') || c == '-') {
+                    permitido.append(c);
+                } else {
+                    huboRechazo = true;
+                }
+            }
+            if (huboRechazo) {
+                campo.setError(getString(R.string.error_solo_numeros));
+                return permitido.toString();
+            }
+            return null; // sin cambios
+        };
+    }
 
-    //    try {
-    //        Date fechaNacimiento = formato.parse(fecha);
+    private boolean validarTelefono() {
+        String texto = editTextTelefono.getText().toString().trim();
+        if (texto.isEmpty()) {
+            editTextTelefono.setError(getString(R.string.error_campo_vacio, getString(R.string.campo_telefono)));
+            return false;
+        }
+        if (!texto.matches(REGEX_TELEFONO)) {
+            editTextTelefono.setError(getString(R.string.error_telefono_formato));
+            return false;
+        }
+        int digitos = texto.replace("-", "").length();
+        if (digitos < MIN_DIGITOS_TELEFONO || digitos > MAX_DIGITOS_TELEFONO) {
+            editTextTelefono.setError(getString(R.string.error_telefono_longitud));
+            return false;
+        }
+        editTextTelefono.setError(null);
+        return true;
+    }
 
-    //        if (fechaNacimiento.after(new Date())) {
-    //            Log.d("PRUEBA_FECHA", "Fecha futura");
-    //        } else {
-    //            Log.d("PRUEBA_FECHA", "Fecha válida");
-    //        }
+    private boolean validarEmail() {
+        String texto = editTextEmail.getText().toString().trim();
+        if (texto.isEmpty()) {
+            editTextTelefono.setError(getString(R.string.error_campo_vacio, getString(R.string.campo_telefono)));
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(texto).matches()) {
+            editTextEmail.setError(getString(R.string.error_email_invalido));
+            return false;
+        }
+        editTextEmail.setError(null);
+        return true;
+    }
 
-    //    } catch (ParseException e) {
-    //        Log.d("PRUEBA_FECHA", "Fecha inválida");
-    //    }
-    //}
+    private boolean validarDireccion() {
+        if (editTextDireccion.getText().toString().trim().isEmpty()) {
+            editTextDireccion.setError(getString(R.string.error_campo_vacio, getString(R.string.campo_direccion)));
+            return false;
+        }
+        editTextDireccion.setError(null);
+        return true;
+    }
+
+    /** Devuelve true si todos los campos validados hasta ahora están completos y son válidos.
+     *  Pensado para llamarse desde el botón Continuar. */
+    public boolean validarFormulario() {
+        boolean nombreApellidoOk = validarNombreYApellido();
+        boolean telefonoOk = validarTelefono();
+        boolean emailOk = validarEmail();
+        boolean direccionOk = validarDireccion();
+        boolean fechaOk = validacionFechaNac();
+        return nombreApellidoOk && telefonoOk && emailOk && direccionOk && fechaOk;
+    }
+
 
 }
