@@ -3,6 +3,16 @@ package frgp.utn.edu.ar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -24,6 +34,7 @@ public class AgregarContacto extends AppCompatActivity {
     private EditText editTextApellido;
     private Spinner spinnerTelefono;
     private Spinner spinnerEmail;
+    private EditText editTextFechaNacimiento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,15 @@ public class AgregarContacto extends AppCompatActivity {
         spinnerTelefono = findViewById(R.id.spinnerTelefono);
         spinnerEmail = findViewById(R.id.spinnerEmail);
         configurarSpinners();
+
+        //PRUEBA VALIDAR FECHA
+        //editTextFechaNacimiento = findViewById(R.id.editTextFechaNacimiento);
+
+        //editTextFechaNacimiento.setOnFocusChangeListener((v, hasFocus) -> {
+        //    if (!hasFocus) {
+        //        validacionFechaNac();
+        //    }
+        //});
     }
 
     private void configurarValidacionNombreApellido() {
@@ -134,5 +154,72 @@ public class AgregarContacto extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void validacionFechaNac(){
+
+        boolean estado = true;
+
+        editTextFechaNacimiento.setError(null); //mostrar error en el campo
+
+        String fecha = editTextFechaNacimiento.getText().toString().trim();
+
+        String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
+
+        if(editTextFechaNacimiento.getText().toString().isEmpty()){
+            editTextFechaNacimiento.setError("Campo requerido");
+            estado = false;
+        }
+        else if (!Pattern.matches(regex, fecha)) {
+                editTextFechaNacimiento.setError("Formato inválido. Use dd/MM/yyyy");
+                estado = false;
+        }
+        else{
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            formato.setLenient(false); // rechazo fechas incorrectas
+
+            try {
+
+                Date fechaNacimiento = formato.parse(fecha);
+
+                Calendar hoy = Calendar.getInstance();
+
+                Calendar fechaMinima = Calendar.getInstance();
+                fechaMinima.add(Calendar.YEAR, -120);
+
+                if (fechaNacimiento.after(hoy.getTime())) {
+                    editTextFechaNacimiento.setError("La fecha no puede ser futura");
+                }
+                else if (fechaNacimiento.before(fechaMinima.getTime())) {
+                    editTextFechaNacimiento.setError("La edad no puede superar los 120 años");
+                }
+
+            } catch (ParseException e) {
+                editTextFechaNacimiento.setError("La fecha ingresada no existe");
+                estado = false;
+            }
+        }
+    }
+
+    //public void probarFecha() {
+
+    //     String fecha = "31/02/2024";
+
+    //     SimpleDateFormat formato =
+    //            new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+    //    formato.setLenient(false);
+
+    //    try {
+    //        Date fechaNacimiento = formato.parse(fecha);
+
+    //        if (fechaNacimiento.after(new Date())) {
+    //            Log.d("PRUEBA_FECHA", "Fecha futura");
+    //        } else {
+    //            Log.d("PRUEBA_FECHA", "Fecha válida");
+    //        }
+
+    //    } catch (ParseException e) {
+    //        Log.d("PRUEBA_FECHA", "Fecha inválida");
+    //    }
+    //}
 
 }
