@@ -25,6 +25,11 @@
             android:name=".ListarContacto"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MasDatosContacto"
+            android:exported="false"
+            android:label="@string/titulo_mas_datos_contacto"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

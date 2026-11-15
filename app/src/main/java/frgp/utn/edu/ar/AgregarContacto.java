@@ -72,6 +72,27 @@ public class AgregarContacto extends AppCompatActivity {
         editTextFechaNacimiento = findViewById(R.id.editTextFechaNacimiento);
         editTextFechaNacimiento.setFocusable(false);
         editTextFechaNacimiento.setOnClickListener(v -> mostrarSelectorFechaNacimiento());
+        findViewById(R.id.buttonContinuar).setOnClickListener(v -> continuar());
+    }
+
+    private void continuar() {
+        if (!validarFormulario()) {
+            return;
+        }
+
+        Bundle datosContacto = new Bundle();
+        datosContacto.putString("nombre", editTextNombre.getText().toString().trim());
+        datosContacto.putString("apellido", editTextApellido.getText().toString().trim());
+        datosContacto.putString("telefono", editTextTelefono.getText().toString().trim());
+        datosContacto.putString("tipoTelefono", getTipoTelefono());
+        datosContacto.putString("email", editTextEmail.getText().toString().trim());
+        datosContacto.putString("tipoEmail", getTipoEmail());
+        datosContacto.putString("direccion", editTextDireccion.getText().toString().trim());
+        datosContacto.putString("fechaNacimiento", editTextFechaNacimiento.getText().toString().trim());
+
+        Intent intent = new Intent(this, MasDatosContacto.class);
+        intent.putExtra(MasDatosContacto.EXTRA_DATOS_CONTACTO, datosContacto);
+        startActivity(intent);
     }
 
     private void configurarValidacionNombreApellido() {
@@ -187,7 +208,7 @@ public class AgregarContacto extends AppCompatActivity {
                     seleccion.setTime(fecha);
                 }
             } catch (ParseException e) {
-                // Si el contenido no es valido, el calendario comienza en la fecha actual.
+                // si el contenido no es valido, el calendario comienza en la fecha actual.
             }
         }
 
@@ -316,7 +337,7 @@ public class AgregarContacto extends AppCompatActivity {
     private boolean validarEmail() {
         String texto = editTextEmail.getText().toString().trim();
         if (texto.isEmpty()) {
-            editTextTelefono.setError(getString(R.string.error_campo_vacio, getString(R.string.campo_telefono)));
+            editTextEmail.setError(getString(R.string.error_campo_vacio, getString(R.string.campo_email)));
             return false;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(texto).matches()) {
