@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -69,11 +70,8 @@ public class AgregarContacto extends AppCompatActivity {
         configurarValidacionTelefonoEmail();
 
         editTextFechaNacimiento = findViewById(R.id.editTextFechaNacimiento);
-        editTextFechaNacimiento.setOnFocusChangeListener((v, tieneFoco) -> {
-            if (!tieneFoco && !editTextFechaNacimiento.getText().toString().trim().isEmpty()) {
-                validacionFechaNac();
-            }
-        });
+        editTextFechaNacimiento.setFocusable(false);
+        editTextFechaNacimiento.setOnClickListener(v -> mostrarSelectorFechaNacimiento());
     }
 
     private void configurarValidacionNombreApellido() {
@@ -167,6 +165,47 @@ public class AgregarContacto extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void mostrarSelectorFechaNacimiento() {
+        Calendar hoy = Calendar.getInstance();
+        hoy.set(Calendar.HOUR_OF_DAY, 0);
+        hoy.set(Calendar.MINUTE, 0);
+        hoy.set(Calendar.SECOND, 0);
+        hoy.set(Calendar.MILLISECOND, 0);
+
+        Calendar fechaMinima = (Calendar) hoy.clone();
+        fechaMinima.add(Calendar.YEAR, -120);
+        Calendar seleccion = (Calendar) hoy.clone();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        formato.setLenient(false);
+        String fechaActual = editTextFechaNacimiento.getText().toString().trim();
+        if (!fechaActual.isEmpty()) {
+            try {
+                Date fecha = formato.parse(fechaActual);
+                if (fecha != null && !fecha.before(fechaMinima.getTime())
+                        && !fecha.after(hoy.getTime())) {
+                    seleccion.setTime(fecha);
+                }
+            } catch (ParseException e) {
+                // Si el contenido no es valido, el calendario comienza en la fecha actual.
+            }
+        }
+
+        DatePickerDialog selector = new DatePickerDialog(this,
+                (view, anio, mes, dia) -> {
+                    Calendar elegida = Calendar.getInstance();
+                    elegida.set(anio, mes, dia);
+                    editTextFechaNacimiento.setText(formato.format(elegida.getTime()));
+                    validacionFechaNac();
+                },
+                seleccion.get(Calendar.YEAR),
+                seleccion.get(Calendar.MONTH),
+                seleccion.get(Calendar.DAY_OF_MONTH));
+        selector.getDatePicker().setMinDate(fechaMinima.getTimeInMillis());
+        selector.getDatePicker().setMaxDate(hoy.getTimeInMillis());
+        selector.show();
+    }
+
     public boolean validacionFechaNac() {
 
         editTextFechaNacimiento.setError(null);
@@ -192,6 +231,10 @@ public class AgregarContacto extends AppCompatActivity {
 
             Calendar fechaMinima = Calendar.getInstance();
             fechaMinima.add(Calendar.YEAR, -120);
+            fechaMinima.set(Calendar.HOUR_OF_DAY, 0);
+            fechaMinima.set(Calendar.MINUTE, 0);
+            fechaMinima.set(Calendar.SECOND, 0);
+            fechaMinima.set(Calendar.MILLISECOND, 0);
 
             if (fechaNacimiento.after(new Date())) {
                 editTextFechaNacimiento.setError("La fecha no puede ser futura");
