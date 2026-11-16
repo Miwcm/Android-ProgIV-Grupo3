@@ -14,6 +14,7 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/txtViewFormContacto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/titulo_mas_datos_contacto"
@@ -21,10 +22,71 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewResumenContacto"
+            android:id="@+id/txtViewDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:text="A continuación, por favor se pide completar
+más datos personales."
+            />
+
+        <LinearLayout
+            android:id="@+id/layoutEstudios"
+            android:background="@drawable/borde_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NIVEL DE ESTUDIOS ALCANZADOS"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutIntereses"
+            android:background="@drawable/borde_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INTERESES"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutInfo"
+            android:background="@drawable/borde_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¿DESEA RECIBIR INFORMACIÓN?"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
+
 </ScrollView>
+

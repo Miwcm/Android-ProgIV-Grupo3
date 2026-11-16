@@ -22,6 +22,6 @@
     <string name="error_telefono_longitud">El teléfono debe tener entre 6 y 15 dígitos</string>
     <string name="error_email_invalido">Ingresá un email válido (ej: nombre@dominio.com)</string>
     <string name="continuar">CONTINUAR</string>
-    <string name="titulo_mas_datos_contacto">Más datos contacto</string>
+    <string name="titulo_mas_datos_contacto">FORMULARIO DE CONTACTO</string>
     <string name="resumen_contacto">Nombre: %1$s\nApellido: %2$s\nTeléfono (%3$s): %4$s\nEmail (%5$s): %6$s\nDirección: %7$s\nFecha de nacimiento: %8$s</string>
 </resources>

@@ -31,15 +31,15 @@ public class MasDatosContacto extends AppCompatActivity {
             return;
         }
 
-        TextView resumen = findViewById(R.id.textViewResumenContacto);
-        resumen.setText(getString(R.string.resumen_contacto,
-                datosContacto.getString("nombre", ""),
-                datosContacto.getString("apellido", ""),
-                datosContacto.getString("tipoTelefono", ""),
-                datosContacto.getString("telefono", ""),
-                datosContacto.getString("tipoEmail", ""),
-                datosContacto.getString("email", ""),
-                datosContacto.getString("direccion", ""),
-                datosContacto.getString("fechaNacimiento", "")));
+       // TextView resumen = findViewById(R.id.txtViewDescripcion);
+       // resumen.setText(getString(R.string.resumen_contacto,
+             //   datosContacto.getString("nombre", ""),
+             //   datosContacto.getString("apellido", ""),
+             //   datosContacto.getString("tipoTelefono", ""),
+             //   datosContacto.getString("telefono", ""),
+             //   datosContacto.getString("tipoEmail", ""),
+             //   datosContacto.getString("email", ""),
+             //   datosContacto.getString("direccion", ""),
+            //    datosContacto.getString("fechaNacimiento", "")));
     }
 }
