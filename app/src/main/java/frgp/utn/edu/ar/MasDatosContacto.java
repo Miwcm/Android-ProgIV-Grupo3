@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -13,6 +14,7 @@ public class MasDatosContacto extends AppCompatActivity {
     public static final String EXTRA_DATOS_CONTACTO = "frgp.utn.edu.ar.DATOS_CONTACTO";
 
     private Bundle datosContacto;
+    private SwitchCompat switchInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +43,16 @@ public class MasDatosContacto extends AppCompatActivity {
              //   datosContacto.getString("email", ""),
              //   datosContacto.getString("direccion", ""),
             //    datosContacto.getString("fechaNacimiento", "")));
+        configurarSwitchInfo();
+    }
+    private void configurarSwitchInfo() {
+        switchInfo = findViewById(R.id.switchInfo);
+        switchInfo.setOnCheckedChangeListener((boton, activado) ->
+                switchInfo.setText(activado ? R.string.switch_info_si : R.string.switch_info_no));
+    }
+
+    /** true si el usuario activó el Switch. Para usar desde la validación y el guardado en SQLite. */
+    public boolean getRecibirInformacion() {
+        return switchInfo.isChecked();
     }
 }

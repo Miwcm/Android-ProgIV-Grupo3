@@ -4,7 +4,7 @@
     <string name="campo_nombre">El nombre</string>
     <string name="campo_apellido">El apellido</string>
     <string name="error_solo_letras">Solo se permiten letras (sin números ni símbolos)</string>
-    <string name="error_campo_vacio">%1$s no puede estar vacío</string>
+    <string name="error_campo_vacio">no puede estar vacío</string>
 
     <string-array name="tipos_contacto">
         <item>Casa</item>
@@ -37,4 +37,8 @@
     <string name="chk_musica">Musica</string>
     <string name="chk_arte">Arte</string>
     <string name="chk_tecnologia">Tecnologia</string>
+
+    <string name="switch_info_si">Sí, deseo recibir información</string>
+    <string name="switch_info_no">No deseo recibir información</string>
+    <string name="lbl_info">¿DESEA RECIBIR INFORMACIÓN?</string>
 </resources>

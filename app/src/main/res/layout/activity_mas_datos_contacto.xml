@@ -154,10 +154,17 @@ más datos personales."
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¿DESEA RECIBIR INFORMACIÓN?"
+                android:text="@string/lbl_info"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:checked="false"
+                android:text="@string/switch_info_no" />
         </LinearLayout>
 
     </LinearLayout>
