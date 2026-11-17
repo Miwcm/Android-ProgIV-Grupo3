@@ -100,9 +100,45 @@ más datos personales."
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="INTERESES"
+                android:text="@string/lbl_intereses"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:columnCount="2"
+                android:rowCount="2">
+
+                <CheckBox
+                    android:id="@+id/chkDeporte"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="@string/chk_deporte" />
+
+                <CheckBox
+                    android:id="@+id/chkMusica"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="@string/chk_musica" />
+
+                <CheckBox
+                    android:id="@+id/chkArte"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="@string/chk_arte" />
+
+                <CheckBox
+                    android:id="@+id/chkTecnologia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="@string/chk_tecnologia" />
+            </GridLayout>
 
         </LinearLayout>
 
