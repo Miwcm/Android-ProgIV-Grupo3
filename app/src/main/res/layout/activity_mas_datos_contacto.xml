@@ -47,6 +47,45 @@ más datos personales."
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <RadioGroup
+                android:id="@+id/radioGroupEstudios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioPrimarioIncompleto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estudios_primario_incompleto" />
+
+                <RadioButton
+                    android:id="@+id/radioPrimarioCompleto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estudios_primario_completo" />
+
+                <RadioButton
+                    android:id="@+id/radioSecundarioIncompleto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estudios_secundario_incompleto" />
+
+                <RadioButton
+                    android:id="@+id/radioSecundarioCompleto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estudios_secundario_completo" />
+
+                <RadioButton
+                    android:id="@+id/radioOtros"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estudios_otros" />
+
+            </RadioGroup>
+
         </LinearLayout>
 
         <LinearLayout

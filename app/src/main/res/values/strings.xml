@@ -24,4 +24,11 @@
     <string name="continuar">CONTINUAR</string>
     <string name="titulo_mas_datos_contacto">FORMULARIO DE CONTACTO</string>
     <string name="resumen_contacto">Nombre: %1$s\nApellido: %2$s\nTeléfono (%3$s): %4$s\nEmail (%5$s): %6$s\nDirección: %7$s\nFecha de nacimiento: %8$s</string>
+
+    <string name="titulo_nivel_estudios">NIVEL DE ESTUDIOS ALCANZADOS</string>
+    <string name="estudios_primario_incompleto">Primario incompleto</string>
+    <string name="estudios_primario_completo">Primario completo</string>
+    <string name="estudios_secundario_incompleto">Secundario incompleto</string>
+    <string name="estudios_secundario_completo">Secundario completo</string>
+    <string name="estudios_otros">Otros</string>
 </resources>
