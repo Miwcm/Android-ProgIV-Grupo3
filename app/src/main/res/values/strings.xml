@@ -41,4 +41,7 @@
     <string name="switch_info_si">Sí, deseo recibir información</string>
     <string name="switch_info_no">No deseo recibir información</string>
     <string name="lbl_info">¿DESEA RECIBIR INFORMACIÓN?</string>
+
+    <string name="titulo_listado_contactos">LISTADO DE CONTACTOS</string>
+    <string name="descripcion_listado_contactos">A continuación se muestran los contactos guardados.</string>
 </resources>
