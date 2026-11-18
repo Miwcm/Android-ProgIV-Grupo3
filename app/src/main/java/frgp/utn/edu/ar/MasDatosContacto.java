@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+
 public class MasDatosContacto extends AppCompatActivity {
     public static final String EXTRA_DATOS_CONTACTO = "frgp.utn.edu.ar.DATOS_CONTACTO";
 
@@ -27,6 +28,8 @@ public class MasDatosContacto extends AppCompatActivity {
 
     private RadioGroup radioGroup;
     private CheckBox chkDeporte, chkMusica, chkArte, chkTecnologia;
+
+    private OpenHelper bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class MasDatosContacto extends AppCompatActivity {
         chkMusica = findViewById(R.id.chkMusica);
         chkArte = findViewById(R.id.chkArte);
         chkTecnologia = findViewById(R.id.chkTecnologia);
+        bd = new OpenHelper(this, OpenHelper.NOMBRE_BD, null, OpenHelper.VERSION_BD);
+        bd.abrir();
     }
     private void configurarSwitchInfo() {
         switchInfo = findViewById(R.id.switchInfo);
@@ -133,8 +138,15 @@ public class MasDatosContacto extends AppCompatActivity {
     public String getDireccion()       { return direccion; }
     public String getFechaNacimiento() { return fechaNacimiento; }
 
+
     /** true si el usuario activó el Switch. Para usar desde la validación y el guardado en SQLite. */
     public boolean getRecibirInformacion() {
         return switchInfo.isChecked();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (bd != null) bd.cerrar();
     }
 }
