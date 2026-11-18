@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,8 @@ public class MasDatosContacto extends AppCompatActivity {
     public static final String EXTRA_DATOS_CONTACTO = "frgp.utn.edu.ar.DATOS_CONTACTO";
 
     private Bundle datosContacto;
+    // Datos recibidos del formulario Agregar Contacto (Aporte 5)
+    private String nombre, apellido, tipoTelefono, telefono, tipoEmail, email, direccion, fechaNacimiento;
     private SwitchCompat switchInfo;
 
     @Override
@@ -33,6 +36,8 @@ public class MasDatosContacto extends AppCompatActivity {
             return;
         }
 
+        recibirDatosContacto();
+
        // TextView resumen = findViewById(R.id.txtViewDescripcion);
        // resumen.setText(getString(R.string.resumen_contacto,
              //   datosContacto.getString("nombre", ""),
@@ -50,6 +55,32 @@ public class MasDatosContacto extends AppCompatActivity {
         switchInfo.setOnCheckedChangeListener((boton, activado) ->
                 switchInfo.setText(activado ? R.string.switch_info_si : R.string.switch_info_no));
     }
+
+    private void recibirDatosContacto() {
+        nombre = datosContacto.getString("nombre", "");
+        apellido = datosContacto.getString("apellido", "");
+        tipoTelefono = datosContacto.getString("tipoTelefono", "");
+        telefono = datosContacto.getString("telefono", "");
+        tipoEmail = datosContacto.getString("tipoEmail", "");
+        email = datosContacto.getString("email", "");
+        direccion = datosContacto.getString("direccion", "");
+        fechaNacimiento = datosContacto.getString("fechaNacimiento", "");
+
+        // Para verificar la recepción en Logcat
+        Log.d("MasDatosContacto", "Recibido: " + nombre + " | " + apellido
+                + " | " + tipoTelefono + " " + telefono
+                + " | " + tipoEmail + " " + email
+                + " | " + direccion + " | " + fechaNacimiento);
+    }
+
+    public String getNombre()          { return nombre; }
+    public String getApellido()        { return apellido; }
+    public String getTipoTelefono()    { return tipoTelefono; }
+    public String getTelefono()        { return telefono; }
+    public String getTipoEmail()       { return tipoEmail; }
+    public String getEmail()           { return email; }
+    public String getDireccion()       { return direccion; }
+    public String getFechaNacimiento() { return fechaNacimiento; }
 
     /** true si el usuario activó el Switch. Para usar desde la validación y el guardado en SQLite. */
     public boolean getRecibirInformacion() {
