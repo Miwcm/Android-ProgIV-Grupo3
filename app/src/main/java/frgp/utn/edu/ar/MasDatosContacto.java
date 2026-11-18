@@ -8,6 +8,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -25,6 +26,7 @@ public class MasDatosContacto extends AppCompatActivity {
     private SwitchCompat switchInfo;
 
     private RadioGroup radioGroup;
+    private CheckBox chkDeporte, chkMusica, chkArte, chkTecnologia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,10 @@ public class MasDatosContacto extends AppCompatActivity {
         configurarSwitchInfo();
         radioGroup = findViewById(R.id.radioGroupEstudios);
 
+        chkDeporte = findViewById(R.id.chkDeporte);
+        chkMusica = findViewById(R.id.chkMusica);
+        chkArte = findViewById(R.id.chkArte);
+        chkTecnologia = findViewById(R.id.chkTecnologia);
     }
     private void configurarSwitchInfo() {
         switchInfo = findViewById(R.id.switchInfo);
@@ -94,9 +100,26 @@ public class MasDatosContacto extends AppCompatActivity {
         }
         return estado;
     }
+
+    private boolean validarIntereses() {
+        boolean haySeleccion = chkDeporte.isChecked() ||
+                chkMusica.isChecked() ||
+                chkArte.isChecked() ||
+                chkTecnologia.isChecked();
+
+        if (!haySeleccion) {
+            Toast.makeText(this, "Debe seleccionar al menos un interés", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
     public void eventoBoton(View view) {
 
         if (validarSeleccionRadio()== false) {
+            return;
+        }
+
+        if (validarIntereses() == false) {
             return;
         }
     }
