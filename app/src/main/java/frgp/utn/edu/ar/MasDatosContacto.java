@@ -2,7 +2,12 @@ package frgp.utn.edu.ar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -18,6 +23,8 @@ public class MasDatosContacto extends AppCompatActivity {
     // Datos recibidos del formulario Agregar Contacto (Aporte 5)
     private String nombre, apellido, tipoTelefono, telefono, tipoEmail, email, direccion, fechaNacimiento;
     private SwitchCompat switchInfo;
+
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +56,14 @@ public class MasDatosContacto extends AppCompatActivity {
              //   datosContacto.getString("direccion", ""),
             //    datosContacto.getString("fechaNacimiento", "")));
         configurarSwitchInfo();
+        radioGroup = findViewById(R.id.radioGroupEstudios);
+
     }
     private void configurarSwitchInfo() {
         switchInfo = findViewById(R.id.switchInfo);
         switchInfo.setOnCheckedChangeListener((boton, activado) ->
                 switchInfo.setText(activado ? R.string.switch_info_si : R.string.switch_info_no));
+
     }
 
     private void recibirDatosContacto() {
@@ -71,6 +81,24 @@ public class MasDatosContacto extends AppCompatActivity {
                 + " | " + tipoTelefono + " " + telefono
                 + " | " + tipoEmail + " " + email
                 + " | " + direccion + " | " + fechaNacimiento);
+    }
+
+    private boolean validarSeleccionRadio() {
+
+        int idSeleccionado = radioGroup.getCheckedRadioButtonId();
+        boolean estado =true;
+
+        if(idSeleccionado == -1){
+            Toast.makeText(this, "Debe seleccionar un nivel de estudio", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return estado;
+    }
+    public void eventoBoton(View view) {
+
+        if (validarSeleccionRadio()== false) {
+            return;
+        }
     }
 
     public String getNombre()          { return nombre; }
