@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar;
 
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MasDatosContacto extends AppCompatActivity {
@@ -68,7 +72,7 @@ public class MasDatosContacto extends AppCompatActivity {
         chkArte = findViewById(R.id.chkArte);
         chkTecnologia = findViewById(R.id.chkTecnologia);
         bd = new OpenHelper(this, OpenHelper.NOMBRE_BD, null, OpenHelper.VERSION_BD);
-        bd.abrir();
+
     }
     private void configurarSwitchInfo() {
         switchInfo = findViewById(R.id.switchInfo);
@@ -119,14 +123,41 @@ public class MasDatosContacto extends AppCompatActivity {
         return true;
     }
     public void eventoBoton(View view) {
-
-        if (validarSeleccionRadio()== false) {
+        if (!validarSeleccionRadio() || !validarIntereses()) {
             return;
         }
 
-        if (validarIntereses() == false) {
+        RadioButton estudioSeleccionado = findViewById(radioGroup.getCheckedRadioButtonId());
+        List<String> intereses = new ArrayList<>();
+        for (CheckBox interes : new CheckBox[]{chkDeporte, chkMusica, chkArte, chkTecnologia}) {
+            if (interes.isChecked()) {
+                intereses.add(interes.getText().toString());
+            }
+        }
+
+        Contacto contacto = new Contacto();
+        contacto.setNombre(nombre);
+        contacto.setApellido(apellido);
+        contacto.setTipoTelefono(tipoTelefono);
+        contacto.setTelefono(telefono);
+        contacto.setTipoEmail(tipoEmail);
+        contacto.setEmail(email);
+        contacto.setDireccion(direccion);
+        contacto.setFechaNacimiento(fechaNacimiento);
+        contacto.setNivelEstudios(estudioSeleccionado.getText().toString());
+        contacto.setIntereses(android.text.TextUtils.join(",", intereses));
+        contacto.setRecibirInfo(getRecibirInformacion());
+
+        try {
+            bd.insertarContacto(contacto);
+        } catch (SQLiteException e) {
+            Toast.makeText(this, R.string.error_guardar_contacto, Toast.LENGTH_SHORT).show();
             return;
         }
+
+        view.setEnabled(false);
+        Toast.makeText(this, R.string.contacto_guardado, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     public String getNombre()          { return nombre; }

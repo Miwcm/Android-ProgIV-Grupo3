@@ -45,4 +45,6 @@
 
     <string name="titulo_listado_contactos">LISTADO DE CONTACTOS</string>
     <string name="descripcion_listado_contactos">A continuación se muestran los contactos guardados.</string>
+    <string name="contacto_guardado">Contacto guardado</string>
+    <string name="error_guardar_contacto">No se pudo guardar el contacto</string>
 </resources>

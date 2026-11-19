@@ -1,4 +1,5 @@
 package frgp.utn.edu.ar;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -56,6 +57,22 @@ public class OpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int versionAnterior, int versionNueva) {
         db.execSQL("DROP TABLE IF EXISTS " + ContactosTable);
         onCreate(db);
+    }
+
+    public void insertarContacto(Contacto contacto) {
+        ContentValues valores = new ContentValues();
+        valores.put(ContactosColumnaNombre, contacto.getNombre());
+        valores.put(ContactosColumnaApellido, contacto.getApellido());
+        valores.put(ContactosColumnaTipoTelefono, contacto.getTipoTelefono());
+        valores.put(ContactosColumnaTelefono, contacto.getTelefono());
+        valores.put(ContactosColumnaTipoEmail, contacto.getTipoEmail());
+        valores.put(ContactosColumnaEmail, contacto.getEmail());
+        valores.put(ContactosColumnaDireccion, contacto.getDireccion());
+        valores.put(ContactosColumnaFechaNacimiento, contacto.getFechaNacimiento());
+        valores.put(ContactosColumnaNivelEstudios, contacto.getNivelEstudios());
+        valores.put(ContactosColumnaIntereses, contacto.getIntereses());
+        valores.put(ContactosColumnaRecibirInfo, contacto.isRecibirInfo() ? 1 : 0);
+        getWritableDatabase().insertOrThrow(ContactosTable, null, valores);
     }
 
     public List<Contacto> obtenerContactos() {
