@@ -12,8 +12,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ListarContacto extends AppCompatActivity {
     private ListView listViewContactos;
@@ -29,6 +32,25 @@ public class ListarContacto extends AppCompatActivity {
             return insets;
         });
         listViewContactos = findViewById(R.id.listViewContactos);
+
+        ArrayList<String> contactosPrueba = new ArrayList<>();
+
+        contactosPrueba.add("JUAN PEREZ - JUAN@GMAIL.COM");
+        contactosPrueba.add("MARIA LOPEZ - MARIA@GMAIL.COM");
+
+        ArrayAdapter<String> adaptador = new ArrayAdapter<>(
+                this,
+                R.layout.item_contacto,
+                R.id.txtDatosContacto,
+                new ArrayList<String>()
+               // contactosPrueba
+        );
+
+        listViewContactos.setAdapter(adaptador);
+
+
+        listViewContactos.setEmptyView(findViewById(R.id.txtSinContactos));
+
         configurarSeleccionContacto();
     }
 
