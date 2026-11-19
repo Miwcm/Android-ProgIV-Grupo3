@@ -12,7 +12,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.widget.ListView;
+import android.widget.Toast;
+
 public class ListarContacto extends AppCompatActivity {
+    private ListView listViewContactos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,19 @@ public class ListarContacto extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        listViewContactos = findViewById(R.id.listViewContactos);
+        configurarSeleccionContacto();
     }
+
+    private void configurarSeleccionContacto() {
+        listViewContactos.setOnItemClickListener((parent, view, position, id) -> {
+            Object contactoSeleccionado = parent.getItemAtPosition(position);
+
+            // Placeholder para Aporte 9 (apertura de detalle)
+            Toast.makeText(this, "Contacto seleccionado en posición: " + position, Toast.LENGTH_SHORT).show();
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
