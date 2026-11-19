@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txtDetalleTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detalle_titulo"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/borde_form"
+            android:padding="12dp"
+            android:stretchColumns="1">
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_nombre"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Miwa" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_apellido"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleApellido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Martinez" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_telefono"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleTelefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Móvil: 11-2345-6789" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_email"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Casa: miwa@mail.com" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_direccion"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleDireccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Calle Falsa 123" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_fecha_nacimiento"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleFechaNacimiento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="01/01/2000" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_nivel_estudios"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleNivelEstudios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Secundario completo" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_intereses"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleIntereses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Deporte, Arte" />
+            </TableRow>
+
+            <TableRow android:paddingTop="6dp" android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/detalle_recibir_info"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDetalleRecibirInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Sí" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/btnCerrarDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/detalle_cerrar" />
+
+    </LinearLayout>
+</ScrollView>

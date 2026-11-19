@@ -47,4 +47,16 @@
     <string name="descripcion_listado_contactos">A continuación se muestran los contactos guardados.</string>
     <string name="contacto_guardado">Contacto guardado</string>
     <string name="error_guardar_contacto">No se pudo guardar el contacto</string>
+
+    <string name="detalle_titulo">DETALLE DEL CONTACTO</string>
+    <string name="detalle_nombre">Nombre</string>
+    <string name="detalle_apellido">Apellido</string>
+    <string name="detalle_telefono">Teléfono</string>
+    <string name="detalle_email">Email</string>
+    <string name="detalle_direccion">Dirección</string>
+    <string name="detalle_fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="detalle_nivel_estudios">Nivel de estudios</string>
+    <string name="detalle_intereses">Intereses</string>
+    <string name="detalle_recibir_info">Recibir información</string>
+    <string name="detalle_cerrar">CERRAR</string>
 </resources>
