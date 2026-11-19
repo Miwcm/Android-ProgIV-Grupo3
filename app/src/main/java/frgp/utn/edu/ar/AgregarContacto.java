@@ -34,8 +34,8 @@ public class AgregarContacto extends AppCompatActivity {
 
     // Solo dígitos, con guiones únicamente entre grupos de dígitos (ej: xx-xxxx-xxxx)
     private static final String REGEX_TELEFONO = "^\\d+(-\\d+)*$";
-    private static final int MIN_DIGITOS_TELEFONO = 6;
-    private static final int MAX_DIGITOS_TELEFONO = 15;
+    private static final int MIN_DIGITOS_TELEFONO = 10;
+    private static final int MAX_DIGITOS_TELEFONO = 10;
     private static final int MAX_LARGO_TELEFONO = 20; // incluye guiones
 
     private EditText editTextNombre;

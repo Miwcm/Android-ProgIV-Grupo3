@@ -34,6 +34,12 @@
         android:layout_margin="20dp"
         android:background="@drawable/borde_form"
         android:orientation="vertical"
-        android:padding="12dp" />
+        android:padding="12dp" >
+
+        <ListView
+            android:id="@+id/listViewContactos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </LinearLayout>
