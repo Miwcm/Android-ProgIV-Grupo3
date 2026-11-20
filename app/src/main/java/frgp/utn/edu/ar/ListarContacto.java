@@ -17,9 +17,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListarContacto extends AppCompatActivity {
     private ListView listViewContactos;
+    private ArrayAdapter<Contacto> adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +35,11 @@ public class ListarContacto extends AppCompatActivity {
         });
         listViewContactos = findViewById(R.id.listViewContactos);
 
-        ArrayList<String> contactosPrueba = new ArrayList<>();
-
-        contactosPrueba.add("JUAN PEREZ - JUAN@GMAIL.COM");
-        contactosPrueba.add("MARIA LOPEZ - MARIA@GMAIL.COM");
-
-        ArrayAdapter<String> adaptador = new ArrayAdapter<>(
+        adaptador = new ArrayAdapter<>(
                 this,
                 R.layout.item_contacto,
                 R.id.txtDatosContacto,
-                new ArrayList<String>()
-               // contactosPrueba
+                new ArrayList<>()
         );
 
         listViewContactos.setAdapter(adaptador);
@@ -52,6 +48,25 @@ public class ListarContacto extends AppCompatActivity {
         listViewContactos.setEmptyView(findViewById(R.id.txtSinContactos));
 
         configurarSeleccionContacto();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recargarContactos();
+    }
+
+    private void recargarContactos() {
+        OpenHelper bd = new OpenHelper(this, OpenHelper.NOMBRE_BD, null, OpenHelper.VERSION_BD);
+        try {
+            List<Contacto> contactos = bd.obtenerContactos();
+            adaptador.setNotifyOnChange(false);
+            adaptador.clear();
+            adaptador.addAll(contactos);
+            adaptador.notifyDataSetChanged();
+        } finally {
+            bd.cerrar();
+        }
     }
 
     private void configurarSeleccionContacto() {
