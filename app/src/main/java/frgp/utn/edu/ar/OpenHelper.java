@@ -116,6 +116,37 @@ public class OpenHelper extends SQLiteOpenHelper {
         return contactos;
     }
 
+    /** Devuelve el contacto con ese id, o null si no existe. */
+    public Contacto obtenerContactoPorId(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        try (Cursor cursor = db.query(ContactosTable, null,
+                ContactosColumnaID + " = ?", new String[]{String.valueOf(id)},
+                null, null, null, "1")) {
+            if (cursor.moveToFirst()) {
+                return cursorAContacto(cursor);
+            }
+            return null;
+        }
+    }
+
+    private Contacto cursorAContacto(Cursor cursor) {
+        Contacto c = new Contacto();
+        c.setId(cursor.getInt(cursor.getColumnIndexOrThrow(ContactosColumnaID)));
+        c.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaNombre)));
+        c.setApellido(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaApellido)));
+        c.setTipoTelefono(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaTipoTelefono)));
+        c.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaTelefono)));
+        c.setTipoEmail(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaTipoEmail)));
+        c.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaEmail)));
+        c.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaDireccion)));
+        c.setFechaNacimiento(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaFechaNacimiento)));
+        c.setNivelEstudios(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaNivelEstudios)));
+        c.setIntereses(cursor.getString(cursor.getColumnIndexOrThrow(ContactosColumnaIntereses)));
+        c.setRecibirInfo(cursor.getInt(cursor.getColumnIndexOrThrow(ContactosColumnaRecibirInfo)) == 1);
+        return c;
+    }
+
     public void abrir() {
         this.getWritableDatabase();
     }
