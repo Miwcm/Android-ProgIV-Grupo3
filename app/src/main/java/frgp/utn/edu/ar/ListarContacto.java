@@ -19,6 +19,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.View;
+import android.widget.Button;
+import androidx.appcompat.app.AlertDialog;
+
 public class ListarContacto extends AppCompatActivity {
     private ListView listViewContactos;
     private ArrayAdapter<Contacto> adaptador;
@@ -71,11 +75,33 @@ public class ListarContacto extends AppCompatActivity {
 
     private void configurarSeleccionContacto() {
         listViewContactos.setOnItemClickListener((parent, view, position, id) -> {
-            Object contactoSeleccionado = parent.getItemAtPosition(position);
+            Contacto contactoSeleccionado = (Contacto) parent.getItemAtPosition(position);
 
-            // Placeholder para Aporte 9 (apertura de detalle)
-            Toast.makeText(this, "Contacto seleccionado en posición: " + position, Toast.LENGTH_SHORT).show();
+            OpenHelper bd = new OpenHelper(this, OpenHelper.NOMBRE_BD, null, OpenHelper.VERSION_BD);
+            try {
+                Contacto contactoDetalle = bd.obtenerContactoPorId(contactoSeleccionado.getId());
+                if (contactoDetalle != null) {
+                    mostrarDetalleContacto(contactoDetalle);
+                }
+            } finally {
+                bd.cerrar();
+            }
         });
+    }
+
+    private void mostrarDetalleContacto(Contacto contacto) {
+        View vistaDetalle = getLayoutInflater().inflate(R.layout.dialog_detalle_contacto, null);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(vistaDetalle)
+                .create();
+
+        // Placeholder para Aporte 10 (Integrante 5: completar los TextView con los datos de 'contacto')
+
+        Button btnCerrarDetalle = vistaDetalle.findViewById(R.id.btnCerrarDetalle);
+        btnCerrarDetalle.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     @Override
